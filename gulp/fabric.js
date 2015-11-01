@@ -30,6 +30,7 @@ var path = require('path');
 var wrap = require('gulp-wrap');
 var uglify = require('gulp-uglify');
 var nugetpack = require('gulp-nuget-pack');
+var csslint = require('gulp-csslint');
 
 // Define paths.
 var distPath = 'dist';
@@ -275,6 +276,8 @@ gulp.task('fabric-less', ['clean-fabric'], function () {
                 .on('error', onGulpError)
             .pipe(rename('fabric.css'))
                 .on('error', onGulpError)
+            .pipe(csslint('.csslintrc'))
+            .pipe(csslint.reporter())
             .pipe(header(bannerTemplate, bannerData))
                 .on('error', onGulpError)
             .pipe(autoprefixer({
@@ -335,6 +338,8 @@ gulp.task('fabric-components-less', ['clean-fabric-components'], function () {
         return gulp.src('src/less/fabric.components.less')
             .pipe(less())
                 .on('error', onGulpError)
+            .pipe(csslint('.csslintrc'))
+            .pipe(csslint.reporter())
             .pipe(header(bannerTemplate, bannerData))
                 .on('error', onGulpError)
             .pipe(autoprefixer({
