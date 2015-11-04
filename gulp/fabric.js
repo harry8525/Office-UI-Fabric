@@ -30,6 +30,9 @@ var path = require('path');
 var wrap = require('gulp-wrap');
 var uglify = require('gulp-uglify');
 var nugetpack = require('gulp-nuget-pack');
+var replace = require('gulp-replace');
+var gulpif = require('gulp-if');
+var config = require('./config')
 
 // Define paths.
 var distPath = 'dist';
@@ -154,6 +157,8 @@ var buildEachComponentCss = function (destination) {
                 .on('error', onGulpError)
             .pipe(less())
                 .on('error', onGulpError)
+            .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
+                .on('error', onGulpError)
             .pipe(header(bannerTemplate, bannerData))
                 .on('error', onGulpError)
             .pipe(autoprefixer({
@@ -268,10 +273,13 @@ gulp.task('fabric-less', ['clean-fabric'], function () {
         date: date,
         monthNames: monthNames
     }
+
     // Baseline set of tasks for building Fabric CSS.
     var _fabricBase = function() {
         return gulp.src(['src/less/fabric.less'])
             .pipe(less())
+                .on('error', onGulpError)
+            .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
                 .on('error', onGulpError)
             .pipe(rename('fabric.css'))
                 .on('error', onGulpError)
@@ -300,6 +308,8 @@ gulp.task('fabric-less', ['clean-fabric'], function () {
     // Build full and minified Fabric RTL CSS.
     var fabricRtl = gulp.src('src/less/fabric.rtl.less')
             .pipe(less())
+                .on('error', onGulpError)
+            .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
                 .on('error', onGulpError)
             .pipe(flipper())
                 .on('error', onGulpError)
@@ -334,6 +344,8 @@ gulp.task('fabric-components-less', ['clean-fabric-components'], function () {
     var _componentsBase = function() {
         return gulp.src('src/less/fabric.components.less')
             .pipe(less())
+                .on('error', onGulpError)
+            .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
                 .on('error', onGulpError)
             .pipe(header(bannerTemplate, bannerData))
                 .on('error', onGulpError)
