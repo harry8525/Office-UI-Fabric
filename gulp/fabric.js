@@ -277,7 +277,7 @@ gulp.task('fabric-less', ['clean-fabric'], function () {
             .pipe(rename('fabric.css'))
                 .on('error', onGulpError)
             .pipe(csslint('.csslintrc'))
-            .pipe(csslint.reporter())
+            .pipe(csslint.reporter('compact'))
             .pipe(header(bannerTemplate, bannerData))
                 .on('error', onGulpError)
             .pipe(autoprefixer({
@@ -339,7 +339,7 @@ gulp.task('fabric-components-less', ['clean-fabric-components'], function () {
             .pipe(less())
                 .on('error', onGulpError)
             .pipe(csslint('.csslintrc'))
-            .pipe(csslint.reporter())
+            .pipe(csslint.reporter('compact'))
             .pipe(header(bannerTemplate, bannerData))
                 .on('error', onGulpError)
             .pipe(autoprefixer({
