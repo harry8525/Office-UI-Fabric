@@ -231,12 +231,14 @@ gulp.task('clean-samples', function () {
 gulp.task('copy-fabric', ['clean-fabric'], function () {
     // Copy LESS files.
     return gulp.src('src/less/*')
+        .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
         .pipe(gulp.dest(paths.distPath + '/less'));
 });
 
 gulp.task('copy-fabric-components', ['clean-fabric-components'], function () {
     // Copy all Components files.
     return gulp.src('src/components/**')
+        .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
         .pipe(gulp.dest(paths.distComponents));
 });
 
