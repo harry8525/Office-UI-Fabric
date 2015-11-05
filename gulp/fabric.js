@@ -239,6 +239,7 @@ gulp.task('copy-fabric-components', ['clean-fabric-components'], function () {
     // Copy all Components files.
     return gulp.src('src/components/**')
         .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
+            .on('error', onGulpError)
         .pipe(gulp.dest(paths.distComponents));
 });
 
@@ -251,12 +252,16 @@ gulp.task('copy-component-samples', ['clean-component-samples'], function() {
             paths.componentsPath + '/**/*.js',
             paths.componentsPath + '/**/*.gif'
         ])
+        .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
+            .on('error', onGulpError)
         .pipe(gulp.dest(paths.distSamples + '/Components'));
 });
 
 gulp.task('copy-samples', ['clean-samples'], function () {
     // Copy all samples files.
     return gulp.src('src/samples/**')
+        .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
+            .on('error', onGulpError)
         .pipe(gulp.dest(paths.distSamples));
 });
 
@@ -409,6 +414,8 @@ gulp.task('samples-less', ['clean-samples'], function () {
         return gulp.src(paths.srcSamples + '/' + folder + '/less/' + folder + '.less')
             .pipe(less())
                 .on('error', onGulpError)
+            .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
+                .on('error', onGulpError)
             .pipe(autoprefixer({
                 browsers: ['last 2 versions', 'ie >= 9'],
                 cascade: false
@@ -438,6 +445,8 @@ gulp.task('fabric-components-js', ['clean-fabric-components'], function() {
 
     return gulp.src(paths.componentsPath + '/**/*.js')
         .pipe(concat('jquery.fabric.js'))
+            .on('error', onGulpError)
+        .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
             .on('error', onGulpError)
         .pipe(gulp.dest(paths.distJS))
             .on('error', onGulpError)
@@ -504,7 +513,8 @@ gulp.task('build-component-data', ['clean-component-samples'], folders(paths.com
                 componentLinks += buildLinkHtml('Components/' + folder, folder);
             }
         }))
-        .on('error', onGulpError);
+            .on('error', onGulpError);
+        
     } else {
         cfiles.pipe(concat(folder + '.html'))
             .on('error', onGulpError)
@@ -524,6 +534,7 @@ gulp.task('build-component-data', ['clean-component-samples'], folders(paths.com
             }
         }))
             .on('error', onGulpError);
+
     }
     return cfiles;
 }));
@@ -541,6 +552,8 @@ gulp.task('component-samples-template', ['build-component-data', 'component-samp
         }))
             .on('error', onGulpError)
         .pipe(template())
+            .on('error', onGulpError)
+        .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
             .on('error', onGulpError)
         .pipe(rename('index.html'))
             .on('error', onGulpError)
@@ -582,6 +595,8 @@ gulp.task('build-components-page', ['clean-samples', 'build-component-data', 'bu
     }))
         .on('error', onGulpError)
     .pipe(template())
+        .on('error', onGulpError)
+    .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
         .on('error', onGulpError)
     .pipe(rename('index.html'))
         .on('error', onGulpError)
