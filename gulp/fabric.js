@@ -245,16 +245,22 @@ gulp.task('copy-fabric-components', ['clean-fabric-components'], function () {
 
 gulp.task('copy-component-samples', ['clean-component-samples'], function() {
 
-    return gulp.src([
-            paths.componentsPath + '/**/*.js', 
+    var images = gulp.src([
             paths.componentsPath + '/**/*.jpg', 
             paths.componentsPath + '/**/*.png', 
-            paths.componentsPath + '/**/*.js',
             paths.componentsPath + '/**/*.gif'
+        ])
+        .pipe(gulp.dest(paths.distSamples + '/Components'));
+
+    // Copy scripts separately, since they have bits that may need to be replaced.
+    var scripts = gulp.src([
+            paths.componentsPath + '/**/*.js', 
         ])
         .pipe(gulpif(config.classPrefix && config.useCustomClassPrefix, replace('ms-', config.classPrefix + '-')))
             .on('error', onGulpError)
         .pipe(gulp.dest(paths.distSamples + '/Components'));
+
+    return mergeStream(images, scripts);
 });
 
 gulp.task('copy-samples', ['clean-samples'], function () {
