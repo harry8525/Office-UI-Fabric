@@ -38,6 +38,7 @@ var paths = {
     distPath: distPath,
     distComponents: distPath + '/components',
     distLess: distPath + '/less',
+    distSass: distPath + '/sass',
     distCSS: distPath + '/css',
     distSamples: distPath + '/samples',
     distSampleComponents: distPath + '/samples/' +  '/Components',
@@ -47,6 +48,7 @@ var paths = {
     srcSamples: srcPath + '/samples',
     componentsPath : 'src/components',
     lessPath: srcPath + '/less',
+    sassPath: srcPath + '/sass',
     templatePath : srcPath + '/templates'
 };
 
@@ -203,7 +205,7 @@ var samplesFolders = getFolders(paths.srcSamples);
 
 // Clean out the distribution folder.
 gulp.task('clean-fabric', function () {
-    return del.sync([paths.distLess, paths.distCSS]);
+    return del.sync([paths.distLess, paths.distCSS, paths.distSass]);
 });
 
 gulp.task('clean-fabric-components', function () {
@@ -222,11 +224,18 @@ gulp.task('clean-samples', function () {
 // Copying Files Tasks
 // ----------------------------------------------------------------------------
 
+// Copy all SASS files to distribution folder.
+gulp.task('copy-fabric-sass', ['clean-fabric'], function () {
+    // Copy SASS files.
+    return gulp.src('src/sass/*')
+        .pipe(gulp.dest(paths.distSass));
+});
+
 // Copy all LESS files to distribution folder.
 gulp.task('copy-fabric', ['clean-fabric'], function () {
     // Copy LESS files.
     return gulp.src('src/less/*')
-        .pipe(gulp.dest(paths.distPath + '/less'));
+        .pipe(gulp.dest(paths.distLess));
 });
 
 gulp.task('copy-fabric-components', ['clean-fabric-components'], function () {
@@ -254,7 +263,7 @@ gulp.task('copy-samples', ['clean-samples'], function () {
 });
 
 // All Copy tasks
-gulp.task('copy', ['copy-fabric', 'copy-fabric-components', 'copy-component-samples', 'copy-samples']);
+gulp.task('copy', ['copy-fabric', 'copy-fabric-sass', 'copy-fabric-components', 'copy-component-samples', 'copy-samples']);
 
 //
 // LESS tasks
@@ -602,7 +611,8 @@ gulp.task('nuget-pack', function(callback) {
             {src: paths.componentsPath, dest: "/content/components/"},
             {src: paths.distCSS, dest: "/content/css/"},
             {src: paths.distJS, dest: "/content/scripts/"},
-            {src: paths.distLess, dest: "/content/less/"}
+            {src: paths.distLess, dest: "/content/less/"},
+            {src: paths.distSass, dest: "/content/sass/"}
         ],
 
         callback
@@ -613,7 +623,7 @@ gulp.task('nuget-pack', function(callback) {
 // Rolled up Build tasks
 // ----------------------------------------------------------------------------
 
-gulp.task('build-fabric', ['clean-fabric', 'copy-fabric', 'fabric-less']);
+gulp.task('build-fabric', ['clean-fabric', 'copy-fabric', 'copy-fabric-sass', 'fabric-less']);
 
 // Build for Fabric component demos
 gulp.task('build-fabric-components', ['clean-fabric-components', 'copy-fabric-components', 'fabric-components-less', 'fabric-components-js']);
