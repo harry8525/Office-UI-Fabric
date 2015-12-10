@@ -43,7 +43,7 @@ $ms-font-path-westeuropean: "SegoeUI-WestEuropean";
 
 @mixin SegoeUIRegular($ms-font-language, $ms-font-path) {
   @font-face {
-    font-family: "${ms-regular} #{$ms-font-language}";
+    font-family: "#{$ms-regular} #{$ms-font-language}";
     src: url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Regular.eot?#iefix') format('embedded-opentype'),
          url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Regular.woff') format('woff'),
          url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Regular.ttf') format('truetype'),
@@ -55,7 +55,7 @@ $ms-font-path-westeuropean: "SegoeUI-WestEuropean";
 
 @mixin SegoeUISemilight($ms-font-language, $ms-font-path) {
   @font-face {
-    font-family: "${ms-semilight} #{$ms-font-language}";
+    font-family: "#{$ms-semilight} #{$ms-font-language}";
     src: url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Semilight.eot?#iefix') format('embedded-opentype'),
          url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Semilight.woff') format('woff'),
          url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Semilight.ttf') format('truetype'),
@@ -67,7 +67,7 @@ $ms-font-path-westeuropean: "SegoeUI-WestEuropean";
 
 @mixin SegoeUISemibold($ms-font-language, $ms-font-path) {
   @font-face {
-    font-family: "${ms-semibold} #{$ms-font-language}";
+    font-family: "#{$ms-semibold} #{$ms-font-language}";
     src: url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Semibold.eot?#iefix') format('embedded-opentype'),
          url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Semibold.woff') format('woff'),
          url('#{$ms-font-directory}/#{$ms-font-path}/SegoeUI-Semibold.ttf') format('truetype'),
