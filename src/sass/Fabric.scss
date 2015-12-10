@@ -7,13 +7,13 @@
 
 
 // Common utilities
-@import './Fabric.Utilities';
+@import './Fabric.Utilities.Output';
 @import './Fabric.ZIndex.Variables';
 @import './Fabric.Mixins';
 
 // Colors
 @import './Fabric.Color.Variables';
-@import './Fabric.Color.Mixins';
+@import './Fabric.Color.Mixins.Output';
 
 // Typography
 @import './Fabric.Typography.Variables';
