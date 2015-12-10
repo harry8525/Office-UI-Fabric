@@ -443,7 +443,7 @@ gulp.task('fabric-sass', ['clean-fabric'], function () {
     // Baseline set of tasks for building Fabric CSS.
     var _fabricBase = function() {
         return gulp.src(['src/sass/fabric.scss'])
-            .pipe(less())
+            .pipe(sass())
                 .on('error', onGulpError)
             .pipe(rename('fabric.css'))
                 .on('error', onGulpError)
@@ -471,7 +471,7 @@ gulp.task('fabric-sass', ['clean-fabric'], function () {
                 .on('error', onGulpError);
     // Build full and minified Fabric RTL CSS.
     var fabricRtl = gulp.src('src/sass/fabric.rtl.scss')
-            .pipe(less())
+            .pipe(sass())
                 .on('error', onGulpError)
             .pipe(flipper())
                 .on('error', onGulpError)

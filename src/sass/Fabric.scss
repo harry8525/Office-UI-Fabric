@@ -22,15 +22,15 @@
 @import './Fabric.Typography.Language.Overrides.Output';
 
 // Icons
-@import './Fabric.Icons.Font';
-@import './Fabric.Icons';
+@import './Fabric.Icons.Font.Output';
+@import './Fabric.Icons.Output';
 
 // Animations
 @import './Fabric.Animations';
 
 // Responsive
 @import './Fabric.Responsive.Variables';
-@import './Fabric.Responsive.Utilities';
+@import './Fabric.Responsive.Utilities.Output';
 
 // Grid
 @import './Fabric.Grid';
