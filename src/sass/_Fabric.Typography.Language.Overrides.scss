@@ -9,7 +9,7 @@
 // A mixin that overrides all of the font classes for languages that
 // use system fonts. A single font-family is used for all weights.
 @mixin language-override-system-fonts($ms-lang-code, $ms-font-family) {
-  *[lang="${ms-lang-code}"] {
+  *[lang="#{$ms-lang-code}"] {
     .ms-font-mi,
     .ms-font-xs,
     .ms-font-s,
@@ -49,7 +49,7 @@ $ms-font-stack-hindi: "Nirmala UI", $ms-font-system-base;
 // A mixin that overrides all of the font classes for languages that use
 // distributed web fonts. These reference different fonts for each weight.
 @mixin language-override-web-fonts($ms-lang-code, $ms-font-family-light, $ms-font-family-semilight, $ms-font-family-regular, $ms-font-family-semibold) {
-  *[lang="${ms-lang-code}"] {
+  *[lang="#{$ms-lang-code}"] {
     .ms-font-xl,
     .ms-font-xxl,
     .ms-fontWeight-light,
