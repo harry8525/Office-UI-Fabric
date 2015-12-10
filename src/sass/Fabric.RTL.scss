@@ -1,0 +1,38 @@
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
+
+//
+// OSS Framework Design Language
+// --------------------------------------------------
+// Fabric Core Module Loader (RTL)
+
+// Common utilities
+@import './Fabric.Utilities';
+@import './Fabric.ZIndex.Variables';
+@import './Fabric.Mixins';
+
+// Colors
+@import './Fabric.Color.Variables';
+@import './Fabric.Color.Mixins';
+
+// Typography
+@import './Fabric.Typography.Variables';
+@import './Fabric.Typography.Fonts';
+@import './Fabric.Typography';
+@import './Fabric.Typography.Language.Overrides.Output';
+
+// Icons
+@import './Fabric.Icons.Font';
+@import './Fabric.Icons.RTL';
+
+// Animations
+@import './Fabric.Animations.RTL';
+
+// Responsive
+@import './Fabric.Responsive.Variables';
+@import './Fabric.Responsive.Utilities';
+
+// Grid
+@import './Fabric.Grid';
+
+// Office colors
+@import './Office.Color.Variables';
